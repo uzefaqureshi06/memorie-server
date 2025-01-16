@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import UserModel from '../models/user.js'; 
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
+import user from '../models/user.js';
 const secret = 'uzefa'
 
 
@@ -51,7 +52,7 @@ const secret = 'uzefa'
 
 export const getUser = async (req, res) => {
     try {
-        const users = await User.find(); 
+        const users = await user.find(); 
         console.log(users);
        return res.status(200).json(users);
     } catch (error) {
@@ -63,7 +64,7 @@ export const getUser = async (req, res) => {
 export const createUser = async (req, res) => {
     console.log(req.body);
     try { 
-        const newUser = new User(req.body); 
+        const newUser = new user(req.body); 
         await newUser.save(); 
        return res.status(201).json(newUser);
     } catch (error) {
